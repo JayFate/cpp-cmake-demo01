@@ -1,3 +1,102 @@
+# cpp-cmake-demo01
+
+## 1、创建构建目录
+
+在项目根目录下创建一个构建目录：
+
+```
+mkdir build
+cd build
+```
+
+## 2、配置项目
+
+在构建目录中运行 CMake 以配置项目：
+
+```
+cmake ..
+```
+
+## 3、编译项目
+
+使用生成的构建系统文件进行编译，假设生成了 Makefile：
+
+```
+make
+```
+
+## 4、运行可执行文件
+
+编译完成后，可以运行生成的可执行文件：
+
+```
+./MyExecutable
+```
+
+## 5、运行测试
+
+使用生成的测试目标进行测试：
+
+```
+./TestMyLib
+```
+
+## 6、使用自定义命令和目标
+
+### 6.1 自定义命令
+
+在 src/CMakeLists.txt 文件中添加自定义命令：
+
+```
+add_custom_command(
+    TARGET MyExecutable
+    POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E echo "Build complete!"
+)
+```
+
+### 6.2 自定义目标
+
+在 src/CMakeLists.txt 文件中添加自定义目标：
+
+```
+add_custom_target(run
+    COMMAND ${CMAKE_BINARY_DIR}/MyExecutable
+    DEPENDS MyExecutable
+)
+```
+
+运行自定义目标：
+
+```
+make run
+```
+
+## 7、跨平台和交叉编译
+
+### 7.1 指定平台
+
+如果需要指定平台进行构建，可以在运行 CMake 时指定平台：
+
+```
+cmake -DCMAKE_SYSTEM_NAME=Linux ..
+```
+
+### 7.2 使用工具链文件
+
+创建一个工具链文件 toolchain.cmake：
+
+```
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR arm)
+```
+
+使用工具链文件进行构建：
+
+```
+cmake -DCMAKE_TOOLCHAIN_FILE=toolchain.cmake ..
+```
+
 ### .gitignore
 
 ```
