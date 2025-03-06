@@ -17,4 +17,12 @@ target_link_libraries(TestMyLib PRIVATE MyLib gtest gtest_main)
 
 # 启用测试
 enable_testing()
-add_test(NAME TestMyLib COMMAND TestMyLib) 
+add_test(NAME TestMyLib COMMAND TestMyLib)
+
+# 设置 IDE 包含路径（仅用于 IDE，不影响实际构建）
+set_target_properties(TestMyLib PROPERTIES
+    INTERFACE_INCLUDE_DIRECTORIES "${gtest_SOURCE_DIR}/include"
+)
+
+# 为 VSCode 的 IntelliSense 导出编译命令
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

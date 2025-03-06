@@ -6,8 +6,11 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # 包含头文件路径
-# include_directories(${PROJECT_SOURCE_DIR}/src/include)
+include_directories(${PROJECT_SOURCE_DIR}/src/include)
 
-# 添加 src 子目录
+# 为 VSCode 的 IntelliSense 导出编译命令
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+# 添加子目录
 add_subdirectory(src)
 add_subdirectory(tests)
